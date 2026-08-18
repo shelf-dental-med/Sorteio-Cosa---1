@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorteio - Shelf Dental Med</title>
+  <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --azul: #1C7FE0;
+      --azul-escuro: #0B5FAD;
+      --teal: #1FAE96;
+      --verde: #00df5e;
+      --tinta: #0f1623;
+      --texto-suave: #8b94a6;
+      --borda: #e7ecf3;
+      --fonte: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eafaf8;
+      overflow: hidden;
+      font-family: var(--fonte);
+    }
+
+    .area-imagem {
+      position: relative;
+      height: 95vh;
+      max-height: 800px;
+      display: inline-block;
+    }
+
+    .area-imagem img {
+      height: 100%;
+      width: auto;
+      display: block;
+    }
+
+    .cadastro {
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+
+      width: 410px;
+      height: auto;
+      min-height: 540px;
+
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 22px;
+      padding: 34px 40px;
+
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.9) inset,
+        0 30px 70px -25px rgba(11, 95, 173, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+
+      font-family: var(--fonte);
+    }
+
+    .cadastro-linha-topo {
+      width: 46px;
+      height: 4px;
+      border-radius: 50px;
+      background: linear-gradient(90deg, var(--teal), var(--azul));
+      margin-bottom: 20px;
+    }
+
+    .cadastro h1 {
+      color: var(--tinta);
+      font-size: 27px;
+      line-height: 1.14;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      max-width: 16ch;
+    }
+
+    .cadastro-subtitulo {
+      color: var(--texto-suave);
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.5;
+      margin-bottom: 26px;
+      max-width: 30ch;
+    }
+
+    .cadastro-form {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .campo {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      background: #fbfcfe;
+      border: 1.5px solid var(--borda);
+      border-radius: 12px;
+      padding: 0 15px;
+
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .campo:focus-within {
+      background: #fff;
+      border-color: var(--azul);
+      box-shadow: 0 0 0 4px rgba(28, 127, 224, 0.12);
+    }
+
+    .campo .icone {
+      color: #aab2c2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: color 0.18s ease;
+    }
+
+    .campo:focus-within .icone {
+      color: var(--azul);
+    }
+
+    .campo input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+
+      color: var(--tinta);
+      font-family: var(--fonte);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .campo input::placeholder {
+      color: #a3acbb;
+      font-weight: 500;
+    }
+
+    .campo-termos {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 6px;
+
+      color: #6b7280;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .campo-termos input {
+      width: 17px;
+      height: 17px;
+      margin: 0;
+      accent-color: var(--azul);
+      cursor: pointer;
+      flex-shrink: 0;
+      border-radius: 4px;
+    }
+
+    .texto-termos {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .texto-termos label {
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .texto-termos span {
+      line-height: 1;
+    }
+
+    .texto-termos button {
+      border: none;
+      background: transparent;
+      color: var(--azul);
+      font-family: var(--fonte);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+      line-height: 1;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1.5px;
+      text-decoration-color: rgba(28, 127, 224, 0.35);
+      transition: text-decoration-color 0.18s ease;
+    }
+
+    .texto-termos button:hover {
+      text-decoration-color: var(--azul);
+    }
+
+    .cadastro-form .btn-submit {
+      height: 52px;
+      margin-top: 12px;
+
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+
+      background: linear-gradient(90deg, var(--teal), var(--azul));
+      background-size: 140% 100%;
+      background-position: 0% 0%;
+      color: white;
+
+      font-family: var(--fonte);
+      font-size: 14.5px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      box-shadow: 0 14px 28px -10px rgba(28, 127, 224, 0.55);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.4s ease, opacity 0.2s ease;
+    }
+
+    .cadastro-form .btn-submit:hover {
+      transform: translateY(-2px);
+      background-position: 100% 0%;
+      box-shadow: 0 18px 34px -10px rgba(28, 127, 224, 0.6);
+    }
+
+    .cadastro-form .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    .cadastro-form .btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .cadastro-form .btn-submit span {
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .mensagem-form {
+      display: none;
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .mensagem-form.sucesso {
+      display: block;
+      color: #047857;
+      background: #dcfce7;
+      border: 1px solid #86efac;
+    }
+
+    .mensagem-form.erro {
+      display: block;
+      color: #b91c1c;
+      background: #fee2e2;
+      border: 1px solid #fecaca;
+    }
+
+    .modal-regulamento {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(15, 23, 42, 0.48);
+      backdrop-filter: blur(6px);
+      padding: 22px;
+      font-family: var(--fonte);
+    }
+
+    .modal-regulamento.ativo {
+      display: flex;
+    }
+
+    .modal-caixa {
+      width: 100%;
+      max-width: 560px;
+      max-height: 85vh;
+      overflow: hidden;
+
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 22px;
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+
+      animation: abrirModal 0.22s ease;
+    }
+
+    @keyframes abrirModal {
+      from {
+        opacity: 0;
+        transform: scale(0.96) translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-topo {
+      padding: 26px 28px 18px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid #eef2f7;
+    }
+
+    .modal-topo h2 {
+      color: var(--tinta);
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .modal-topo p {
+      color: var(--texto-suave);
+      font-size: 12.5px;
+      font-weight: 500;
+      margin-top: 7px;
+    }
+
+    .modal-fechar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+
+      background: #f1f5f9;
+      color: #334155;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+      transition: background 0.18s ease;
+    }
+
+    .modal-fechar:hover {
+      background: #e2e8f0;
+    }
+
+    .modal-conteudo {
+      padding: 24px 28px 28px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+
+    .modal-conteudo ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .modal-conteudo li {
+      color: #475569;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.55;
+      padding-left: 28px;
+      position: relative;
+    }
+
+    .modal-conteudo li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 1px;
+
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+
+      background: linear-gradient(90deg, var(--teal), var(--azul));
+      color: white;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .modal-rodape {
+      margin-top: 24px;
+      padding: 15px 17px;
+      border-radius: 14px;
+      background: #f4f8fd;
+      color: #5a6b80;
+      font-size: 12.5px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+
+    /* ==========================================================
+       ANIMAÇÃO SUAVE DE ENTRADA
+       Mantém o design original: não muda tamanho, posição, cores
+       nem layout. Apenas aplica entrada suave com opacity/filter.
+    ========================================================== */
+
+    body {
+      animation: sdmPaginaEntrada 0.55s ease-out both;
+    }
+
+    .area-imagem img {
+      animation: sdmImagemEntrada 0.75s ease-out 0.06s both;
+      will-change: opacity, filter;
+    }
+
+    .cadastro {
+      animation: sdmCardEntrada 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+      will-change: opacity, filter;
+    }
+
+    .cadastro-linha-topo,
+    .cadastro h1,
+    .cadastro-subtitulo,
+    .cadastro-form .campo,
+    .campo-termos,
+    .btn-submit {
+      animation: sdmElementoEntrada 0.52s ease-out both;
+      will-change: opacity, filter;
+    }
+
+    .cadastro-linha-topo {
+      animation-delay: 0.42s;
+    }
+
+    .cadastro h1 {
+      animation-delay: 0.50s;
+    }
+
+    .cadastro-subtitulo {
+      animation-delay: 0.58s;
+    }
+
+    .cadastro-form .campo:nth-child(1) {
+      animation-delay: 0.66s;
+    }
+
+    .cadastro-form .campo:nth-child(2) {
+      animation-delay: 0.74s;
+    }
+
+    .cadastro-form .campo:nth-child(3) {
+      animation-delay: 0.82s;
+    }
+
+    .cadastro-form .campo:nth-child(4) {
+      animation-delay: 0.90s;
+    }
+
+    .campo-termos {
+      animation-delay: 0.98s;
+    }
+
+    .btn-submit {
+      animation-delay: 1.06s;
+    }
+
+    .modal-regulamento.ativo {
+      animation: sdmModalFundoEntrada 0.22s ease-out both;
+    }
+
+    @keyframes sdmPaginaEntrada {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes sdmImagemEntrada {
+      from {
+        opacity: 0;
+        filter: blur(8px);
+      }
+
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    @keyframes sdmCardEntrada {
+      from {
+        opacity: 0;
+        filter: blur(10px);
+      }
+
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    @keyframes sdmElementoEntrada {
+      from {
+        opacity: 0;
+        filter: blur(6px);
+      }
+
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    @keyframes sdmModalFundoEntrada {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+
+    @media (max-width: 900px) {
+      body {
+        overflow: auto;
+        padding: 20px;
+      }
+
+      .area-imagem {
+        width: 100%;
+        height: auto;
+        max-height: none;
+      }
+
+      .area-imagem img {
+        width: 100%;
+        height: auto;
+      }
+
+      .cadastro {
+        right: 50%;
+        top: 50%;
+        transform: translate(50%, -50%);
+        width: 88%;
+        max-width: 410px;
+        padding: 30px 26px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cadastro {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        margin: 20px auto 0;
+        width: 100%;
+      }
+
+      .area-imagem img {
+        display: none;
+      }
+
+      body {
+        background: #eafaf8;
+      }
+
+      .modal-caixa {
+        max-height: 88vh;
+      }
+
+      .modal-topo {
+        padding: 22px 20px 14px;
+      }
+
+      .modal-conteudo {
+        padding: 20px;
+      }
+
+      .texto-termos {
+        white-space: normal;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="area-imagem">
+    <img src="assets/img/fundo.png" alt="Imagem de fundo do sorteio">
+
+    <div class="cadastro">
+      <div class="cadastro-linha-topo"></div>
+
+      <h1>Cadastre-se para participar do nosso sorteio</h1>
+
+      <p class="cadastro-subtitulo">
+        Preencha seus dados abaixo para confirmar sua participação.
+      </p>
+
+      <form class="cadastro-form" id="formCadastro">
+        <div class="campo">
+          <span class="icone">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none">
+              <rect x="4" y="3" width="16" height="18" rx="3" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="10" cy="10" r="2.2" stroke="currentColor" stroke-width="1.8" />
+              <path d="M7 16c.7-2 5.3-2 6 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              <path d="M15 9h2.5M15 13h2.5M15 17h2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </span>
+
+          <input id="cpf" name="cpf" type="text" placeholder="CPF" inputmode="numeric" autocomplete="off" maxlength="14" aria-label="CPF">
+        </div>
+
+        <div class="campo">
+          <span class="icone">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none">
+              <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8" />
+              <path d="M4 20c1.5-4 14.5-4 16 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </span>
+
+          <input id="nome" name="nome" type="text" placeholder="Nome completo" autocomplete="name" aria-label="Nome completo">
+        </div>
+
+        <div class="campo">
+          <span class="icone">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none">
+              <path
+                d="M7 4l3 3-2 2c1.2 2.4 2.6 3.8 5 5l2-2 3 3-1.5 3c-.4.8-1.3 1.2-2.2 1C8.6 17.9 4.9 14.2 3.8 8.7c-.2-.9.2-1.8 1-2.2L7 4z"
+                stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+            </svg>
+          </span>
+
+          <input id="telefone" name="telefone" type="tel" placeholder="Telefone" inputmode="numeric" autocomplete="tel" maxlength="15" aria-label="Telefone">
+        </div>
+
+        <div class="campo">
+          <span class="icone">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none">
+              <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="17" cy="7" r="1" fill="currentColor" />
+            </svg>
+          </span>
+
+          <input id="instagram" name="instagram" type="text" placeholder="Instagram" autocomplete="off" maxlength="31" aria-label="Instagram">
+        </div>
+
+        <div class="campo-termos">
+          <input type="checkbox" id="aceitarTermos" name="aceitarTermos">
+
+          <div class="texto-termos">
+            <label for="aceitarTermos">Li e aceito os</label>
+
+            <button type="button" id="abrirRegulamento">
+              termos e regulamento
+            </button>
+
+            <span>da campanha.</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnEnviar">
+          Participar do sorteio
+          <span>✦</span>
+        </button>
+      </form>
+
+      <div id="mensagemForm" class="mensagem-form"></div>
+    </div>
+  </div>
+
+  <div class="modal-regulamento" id="modalRegulamento">
+    <div class="modal-caixa">
+      <div class="modal-topo">
+        <div>
+          <h2>Regulamento do sorteio</h2>
+          <p>Leia as regras antes de confirmar sua participação.</p>
+        </div>
+
+        <button type="button" class="modal-fechar" id="fecharRegulamento" aria-label="Fechar">×</button>
+      </div>
+
+      <div class="modal-conteudo">
+        <ul>
+          <li>Para participar, o usuário deverá preencher corretamente CPF, nome completo, telefone e Instagram.</li>
+          <li>Será permitido apenas um cadastro por CPF.</li>
+          <li>CPFs inválidos, incompletos ou repetidos não serão aceitos pelo sistema.</li>
+          <li>O telefone e Instagram informados poderão ser usados para contato em caso de contemplação.</li>
+          <li>O participante é responsável pela veracidade dos dados informados no cadastro.</li>
+          <li>Para concluir a participação, é necessário aceitar os termos e regulamento da campanha.</li>
+          <li>O sorteio será realizado conforme as regras internas da campanha.</li>
+          <li>Caso o ganhador não possa ser contatado, a empresa poderá realizar nova tentativa ou novo sorteio.</li>
+          <li>Os dados serão utilizados apenas para controle da campanha e confirmação da participação.</li>
+        </ul>
+
+        <div class="modal-rodape">
+          Ao clicar em “Participar do sorteio”, você confirma que leu e aceita as regras desta campanha.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const FIREBASE_URL = "https://gerenciador-shelf-dental-med-default-rtdb.firebaseio.com/sorteiocosa";
+    const CAMINHO_FIREBASE = "sorteio1";
+
+    const formCadastro = document.getElementById("formCadastro");
+    const cpfInput = document.getElementById("cpf");
+    const nomeInput = document.getElementById("nome");
+    const telefoneInput = document.getElementById("telefone");
+    const instagramInput = document.getElementById("instagram");
+    const aceitarTermosInput = document.getElementById("aceitarTermos");
+    const btnEnviar = document.getElementById("btnEnviar");
+    const mensagemForm = document.getElementById("mensagemForm");
+
+    const modalRegulamento = document.getElementById("modalRegulamento");
+    const abrirRegulamento = document.getElementById("abrirRegulamento");
+    const fecharRegulamento = document.getElementById("fecharRegulamento");
+
+    cpfInput.addEventListener("input", function () {
+      let valor = cpfInput.value.replace(/\D/g, "");
+
+      valor = valor.slice(0, 11);
+
+      valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+      valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+      valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+      cpfInput.value = valor;
+    });
+
+    telefoneInput.addEventListener("input", function () {
+      let valor = telefoneInput.value.replace(/\D/g, "");
+
+      valor = valor.slice(0, 11);
+
+      if (valor.length <= 10) {
+        valor = valor.replace(/(\d{2})(\d)/, "($1) $2");
+        valor = valor.replace(/(\d{4})(\d)/, "$1-$2");
+      } else {
+        valor = valor.replace(/(\d{2})(\d)/, "($1) $2");
+        valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
+      }
+
+      telefoneInput.value = valor;
+    });
+
+    instagramInput.addEventListener("input", function () {
+      let valor = instagramInput.value.trim();
+
+      valor = valor.replace(/\s/g, "");
+      valor = valor.replace(/[^a-zA-Z0-9._@]/g, "");
+
+      if (valor.length > 0 && !valor.startsWith("@")) {
+        valor = "@" + valor.replace(/@/g, "");
+      } else {
+        valor = "@" + valor.replace(/@/g, "");
+      }
+
+      valor = valor.slice(0, 31);
+
+      if (valor === "@") {
+        valor = "";
+      }
+
+      instagramInput.value = valor;
+    });
+
+    abrirRegulamento.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      abrirModalRegulamento();
+    });
+
+    fecharRegulamento.addEventListener("click", function () {
+      modalRegulamento.classList.remove("ativo");
+    });
+
+    modalRegulamento.addEventListener("click", function (event) {
+      if (event.target === modalRegulamento) {
+        modalRegulamento.classList.remove("ativo");
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        modalRegulamento.classList.remove("ativo");
+      }
+    });
+
+    function abrirModalRegulamento() {
+      modalRegulamento.classList.add("ativo");
+    }
+
+    formCadastro.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      limparMensagem();
+
+      const cpfSomenteNumeros = cpfInput.value.replace(/\D/g, "");
+      const telefoneSomenteNumeros = telefoneInput.value.replace(/\D/g, "");
+      const nome = nomeInput.value.trim().replace(/\s+/g, " ");
+      const instagram = formatarInstagram(instagramInput.value);
+
+      if (!validarCPF(cpfSomenteNumeros)) {
+        mostrarMensagem("erro", "CPF inválido. Verifique o número informado.");
+        cpfInput.focus();
+        return;
+      }
+
+      if (nome.length < 3) {
+        mostrarMensagem("erro", "Informe seu nome completo.");
+        nomeInput.focus();
+        return;
+      }
+
+      if (telefoneSomenteNumeros.length < 10 || telefoneSomenteNumeros.length > 11) {
+        mostrarMensagem("erro", "Telefone inválido. Informe DDD + número.");
+        telefoneInput.focus();
+        return;
+      }
+
+      if (!validarInstagram(instagram)) {
+        mostrarMensagem("erro", "Informe um Instagram válido. Exemplo: @seuinstagram");
+        instagramInput.focus();
+        return;
+      }
+
+      if (!aceitarTermosInput.checked) {
+        mostrarMensagem("erro", "Você precisa aceitar os termos e regulamento para participar.");
+        aceitarTermosInput.focus();
+        return;
+      }
+
+      const agora = new Date().toISOString();
+
+      const dadosCadastro = {
+        cpf: cpfSomenteNumeros,
+        cpfFormatado: cpfInput.value,
+        nome: nome,
+        telefone: telefoneSomenteNumeros,
+        telefoneFormatado: telefoneInput.value,
+        instagram: instagram,
+        campanha: "sorteio",
+        status: "confirmado",
+        aceitouTermos: true,
+        termosAceitosEm: agora,
+        versaoRegulamento: "1.0",
+        criadoEm: agora,
+        origem: window.location.href
+      };
+
+      btnEnviar.disabled = true;
+      btnEnviar.innerHTML = "Enviando...";
+
+      try {
+        const resultado = await salvarCadastroSemDuplicar(dadosCadastro);
+
+        if (resultado.duplicado) {
+          mostrarMensagem("erro", "Este CPF já está cadastrado no sorteio.");
+          return;
+        }
+
+        mostrarMensagem("sucesso", "Cadastro realizado com sucesso. Sua participação foi confirmada!");
+        formCadastro.reset();
+
+      } catch (erro) {
+        console.error(erro);
+        mostrarMensagem("erro", "Não foi possível salvar o cadastro. Verifique a conexão ou as regras do Firebase.");
+      } finally {
+        btnEnviar.disabled = false;
+        btnEnviar.innerHTML = 'Participar do sorteio <span>✦</span>';
+      }
+    });
+
+    async function salvarCadastroSemDuplicar(dados) {
+      const cpf = dados.cpf;
+      const url = `${FIREBASE_URL}/${CAMINHO_FIREBASE}/${cpf}.json`;
+
+      const consulta = await fetch(url, {
+        method: "GET",
+        headers: {
+          "X-Firebase-ETag": "true"
+        }
+      });
+
+      if (!consulta.ok) {
+        throw new Error("Erro ao consultar CPF no Firebase.");
+      }
+
+      const existente = await consulta.json();
+
+      if (existente !== null) {
+        return { duplicado: true };
+      }
+
+      const etag = consulta.headers.get("ETag");
+
+      const headers = {
+        "Content-Type": "application/json"
+      };
+
+      if (etag) {
+        headers["if-match"] = etag;
+      }
+
+      const salvar = await fetch(url, {
+        method: "PUT",
+        headers: headers,
+        body: JSON.stringify(dados)
+      });
+
+      if (salvar.status === 412) {
+        return { duplicado: true };
+      }
+
+      if (!salvar.ok) {
+        throw new Error("Erro ao salvar cadastro no Firebase.");
+      }
+
+      return { duplicado: false };
+    }
+
+    function validarCPF(cpf) {
+      cpf = cpf.replace(/\D/g, "");
+
+      if (cpf.length !== 11) {
+        return false;
+      }
+
+      if (/^(\d)\1{10}$/.test(cpf)) {
+        return false;
+      }
+
+      let soma = 0;
+
+      for (let i = 0; i < 9; i++) {
+        soma += parseInt(cpf.charAt(i)) * (10 - i);
+      }
+
+      let primeiroDigito = 11 - (soma % 11);
+
+      if (primeiroDigito >= 10) {
+        primeiroDigito = 0;
+      }
+
+      if (primeiroDigito !== parseInt(cpf.charAt(9))) {
+        return false;
+      }
+
+      soma = 0;
+
+      for (let i = 0; i < 10; i++) {
+        soma += parseInt(cpf.charAt(i)) * (11 - i);
+      }
+
+      let segundoDigito = 11 - (soma % 11);
+
+      if (segundoDigito >= 10) {
+        segundoDigito = 0;
+      }
+
+      if (segundoDigito !== parseInt(cpf.charAt(10))) {
+        return false;
+      }
+
+      return true;
+    }
+
+    function formatarInstagram(valor) {
+      valor = valor.trim();
+      valor = valor.replace(/\s/g, "");
+      valor = valor.replace(/[^a-zA-Z0-9._@]/g, "");
+
+      if (valor.length === 0) {
+        return "";
+      }
+
+      valor = valor.replace(/@/g, "");
+      valor = "@" + valor;
+      valor = valor.slice(0, 31);
+
+      return valor.toLowerCase();
+    }
+
+    function validarInstagram(instagram) {
+      if (!instagram) {
+        return false;
+      }
+
+      const usuario = instagram.replace("@", "");
+
+      if (usuario.length < 2 || usuario.length > 30) {
+        return false;
+      }
+
+      return /^[a-zA-Z0-9._]+$/.test(usuario);
+    }
+
+    function mostrarMensagem(tipo, texto) {
+      mensagemForm.className = `mensagem-form ${tipo}`;
+      mensagemForm.textContent = texto;
+    }
+
+    function limparMensagem() {
+      mensagemForm.className = "mensagem-form";
+      mensagemForm.textContent = "";
+    }
+  </script>
+
+</body>
+
+</html>
