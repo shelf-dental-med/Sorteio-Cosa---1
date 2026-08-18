@@ -19,10 +19,52 @@
             text-align: center;
         }
 
-        img {
+        #qrArea {
+            display: none;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        /* Animação ao aparecer */
+        #qrArea.aparecer {
+            display: block;
+            animation: aparecer 0.5s ease forwards;
+        }
+
+        /* Animação ao sumir */
+        #qrArea.sumir {
+            animation: sumir 0.5s ease forwards;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes sumir {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+        }
+
+        #qrCode {
             max-width: 350px;
             width: 90%;
             height: auto;
+
             border-radius: 15px;
             border: 5px ridge rgba(28,110,164,0.07);
         }
@@ -32,24 +74,72 @@
             font-size: 32px;
             font-weight: bold;
         }
+
+        #btnIniciar {
+            padding: 15px 35px;
+            font-size: 20px;
+            font-weight: bold;
+
+            border: none;
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            background: #0099ff;
+            color: white;
+
+            transition: 0.3s;
+        }
+
+        #btnIniciar:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 
 <body>
 
     <div class="container">
-        <img src="1.webp" alt="QR Code">
 
-        <div id="temporizador">05:00</div>
+        <div id="qrArea">
+
+            <img
+                id="qrCode"
+                src="1.png"
+                alt="QR Code"
+            >
+
+            <div id="temporizador">
+                02:00
+            </div>
+
+        </div>
+
+        <button id="btnIniciar">
+            Iniciar
+        </button>
+
     </div>
 
+
     <script>
+
         // TEMPO EM MINUTOS
-        let minutos = 2;
+        const minutos = 2;
 
         let tempo = minutos * 60;
+        let intervalo = null;
 
-        const temporizador = document.getElementById("temporizador");
+
+        const qrArea =
+            document.getElementById("qrArea");
+
+        const temporizador =
+            document.getElementById("temporizador");
+
+        const btnIniciar =
+            document.getElementById("btnIniciar");
+
 
         function atualizarTempo() {
 
@@ -57,22 +147,74 @@
             const seg = tempo % 60;
 
             temporizador.textContent =
-                String(min).padStart(2, "0") +
-                ":" +
+                String(min).padStart(2, "0")
+                +
+                ":"
+                +
                 String(seg).padStart(2, "0");
 
+
             if (tempo <= 0) {
-                temporizador.textContent = "00:00";
+
                 clearInterval(intervalo);
+
+                temporizador.textContent = "00:00";
+
+
+                // ANIMAÇÃO DE SAÍDA
+                qrArea.classList.remove("aparecer");
+                qrArea.classList.add("sumir");
+
+
+                // Espera animação terminar
+                setTimeout(() => {
+
+                    qrArea.style.display = "none";
+
+                    qrArea.classList.remove("sumir");
+
+                    // Mostra botão novamente
+                    btnIniciar.style.display = "inline-block";
+
+                }, 500);
+
                 return;
             }
+
 
             tempo--;
         }
 
-        atualizarTempo();
 
-        const intervalo = setInterval(atualizarTempo, 1000);
+        btnIniciar.addEventListener("click", function() {
+
+            // Reinicia contador
+            tempo = minutos * 60;
+
+            // Esconde botão
+            btnIniciar.style.display = "none";
+
+
+            // Mostra área
+            qrArea.style.display = "block";
+
+            // Remove animação anterior
+            qrArea.classList.remove("sumir");
+
+            // Força atualização da animação
+            void qrArea.offsetWidth;
+
+            // ANIMAÇÃO DE ENTRADA
+            qrArea.classList.add("aparecer");
+
+
+            atualizarTempo();
+
+            intervalo =
+                setInterval(atualizarTempo, 1000);
+
+        });
+
     </script>
 
 </body>
